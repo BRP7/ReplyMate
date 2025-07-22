@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReplyMate – Save Time. Reply Smarter.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+    <body class="bg-gray-50 text-gray-900">
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold text-gray-900">ReplyMate</h1>
+        </div>
+    </header>
+
+    <main>
+        <section class="bg-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-4">Smart Replies. Less Typing. More Clients.</h2>
+            <p class="text-lg text-gray-600 mb-8">ReplyMate helps you respond to emails 10x faster by auto-suggesting context-aware replies.</p>
+            <div class="mt-6">
+            <form id="emailForm" class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <input type="email" id="email" placeholder="Enter your email" class="px-4 py-2 border rounded-md w-full sm:w-64" required>
+                <input type="text" id="price" placeholder="How much would you pay?" class="px-4 py-2 border rounded-md w-full sm:w-64" required>
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">Join Waitlist</button>
+            </form>
+            <p id="formMsg" class="mt-4 text-sm"></p>
+            </div>
+        </div>
+        </section>
+
+        <section class="bg-gray-100 py-16">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h3 class="text-2xl font-semibold mb-6">Tired of Typing the Same Replies?</h3>
+            <p class="text-gray-700">ReplyMate reads your previous email responses and suggests smart replies to new messages. Works with Gmail & WhatsApp Web through a simple Chrome Extension. You approve every message — no surprise sends.</p>
+        </div>
+        </section>
+
+        <section class="px-6 py-16 bg-white">
+        <h2 class="text-3xl font-semibold text-center mb-10">Tired of Repeating Yourself?</h2>
+        <div class="max-w-4xl mx-auto text-lg text-center">
+            <p>
+            Small business owners spend hours daily replying to the same questions: pricing, appointments, complaints.
+            It’s exhausting, and you end up losing leads due to delays.
+            </p>
+        </div>
+        </section>
+
+        <!-- Solution Section -->
+        <section class="px-6 py-16 bg-gray-100">
+        <h2 class="text-3xl font-semibold text-center mb-10">ReplyMate Fixes That</h2>
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="bg-white p-6 rounded-xl shadow">
+            <h3 class="font-bold text-xl mb-2">Smart Suggestions</h3>
+            <p>Get context-aware AI replies based on your past messages.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow">
+            <h3 class="font-bold text-xl mb-2">No Learning Curve</h3>
+            <p>Works with Gmail & WhatsApp Web. No extra app to manage.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow">
+            <h3 class="font-bold text-xl mb-2">Semi-Automated</h3>
+            <p>You’re in control. AI writes it, you approve and send.</p>
+            </div>
+        </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="px-6 py-16">
+        <h2 class="text-3xl font-semibold text-center mb-10">How It Works</h2>
+        <ol class="list-decimal list-inside space-y-4 text-lg max-w-xl mx-auto">
+            <li>Install the Chrome Extension</li>
+            <li>Link your Gmail or WhatsApp Web</li>
+            <li>AI reads your past replies to learn tone & content</li>
+            <li>Start replying 3x faster with just one click</li>
+        </ol>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="px-6 py-16 bg-white">
+        <h2 class="text-3xl font-semibold text-center mb-10">FAQs</h2>
+        <div class="max-w-3xl mx-auto space-y-6">
+            <div>
+            <h3 class="font-bold">Does it send messages automatically?</h3>
+            <p>No. You always review and approve before sending.</p>
+            </div>
+            <div>
+            <h3 class="font-bold">What platforms does it work with?</h3>
+            <p>Currently Gmail & WhatsApp Web. More soon.</p>
+            </div>
+            <div>
+            <h3 class="font-bold">Is my data safe?</h3>
+            <p>Yes, we never store or share your messages.</p>
+            </div>
+        </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="px-6 py-10 text-center text-sm text-gray-500">
+      <p>© 2025 ReplyMate. All rights reserved.</p>
+      <p>Contact: replymateai@gmail.com</p>
+    </footer>
+  </body>
+    <script>
+    document.getElementById("emailForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const price = document.getElementById("price").value.trim();
+      const msg = document.getElementById("formMsg");
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        msg.textContent = "Please enter a valid email address.";
+        msg.className = "text-red-600";
+        return;
+      }
+
+      if (!price || isNaN(price) || Number(price) <= 0) {
+        msg.textContent = "Please enter a valid amount you'd be willing to pay.";
+        msg.className = "text-red-600";
+        return;
+      }
+
+      // Simulate sending email (in real app, call backend/API)
+      const mailtoLink = `mailto:replymateai@gmail.com?subject=ReplyMate Interest&body=Email: ${email}%0D%0APrice: ₹${price}`;
+      window.location.href = mailtoLink;
+
+      msg.textContent = "Thanks! We'll be in touch soon.";
+      msg.className = "text-green-600";
+    });
+  </script>
+</html>
+
