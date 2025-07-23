@@ -21,13 +21,27 @@
           <p class="text-lg text-gray-600 mb-8">ReplyMate helps you respond to emails 10x faster by auto-suggesting context-aware replies.</p>
 
           <div class="mt-6">
-            <form id="emailForm" class="flex flex-col sm:flex-row justify-center items-center gap-4">
-              <input type="email" id="email" placeholder="Enter your email" class="px-4 py-2 border rounded-md w-full sm:w-64" required>
-              <input type="text" id="price" placeholder="How much would you pay?" class="px-4 py-2 border rounded-md w-full sm:w-64" required>
+            <form id="emailForm" class="flex flex-col sm:flex-row justify-center items-center gap-4 flex-wrap">
+              <input type="email" id="email" placeholder="Enter your email" class="px-4 py-2 border rounded-md w-full sm:w-64" required />
+              <div class="flex gap-2 w-full sm:w-64">
+                <select id="currency" class="px-4 py-2 border rounded-md w-1/3" required>
+                  <option value="GBP(£)">£</option>
+                  <option value="USD($)">$</option>
+                  <option value="INR(₹)">₹</option>
+                  <option value="EUR(€)">€</option>
+                  <!-- <option value="GBP(£)">£</option> -->
+                  <option value="JPY(¥)">¥</option>
+                </select>
+                <input type="number" id="price" placeholder="Amount" class="px-4 py-2 border rounded-md w-2/3" min="0" step="0.01" required />
+              </div>
               <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">Join & Set Your Price</button>
             </form>
+            <p class="text-sm text-gray-500 mt-2">
+              Tell us what you think ReplyMate is worth per month — we want to price it right for you!
+            </p>
             <p id="formMsg" class="mt-4 text-sm"></p>
           </div>
+
 
           <div class="mt-12">
             <img src="main-sectin.png" alt="ReplyMate Gmail UI" class="mx-auto rounded-lg shadow-xl w-full max-w-3xl">
@@ -120,7 +134,10 @@
         e.preventDefault();
 
         const email = document.getElementById("email").value.trim();
-        const price = document.getElementById("price").value.trim();
+        // const price = document.getElementById("price").value.trim();
+        const priceValue = document.getElementById("price").value.trim();
+        const currency = document.getElementById("currency").value;
+
         const msg = document.getElementById("formMsg");
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -130,15 +147,17 @@
           return;
         }
 
-        if (!price) {
-          msg.textContent = "Please enter a price.";
+        if (!priceValue || !currency) {
+          msg.textContent = "Please select a currency and enter a price.";
           msg.className = "text-red-600";
           return;
         }
 
+        const fullPrice = `${currency}${priceValue}`;
+
         emailjs.send("service_f52ptmm", "template_vrzh7m5", {
           email: email,
-          price: price
+          price: fullPrice
         })
         .then(() => {
           msg.textContent = `Thanks! We'll reach out soon.`;
